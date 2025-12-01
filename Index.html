@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="ar">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>صفحة تسجيل</title>
+  <<style>
+:root{
+  --bg1:#13141f;
+  --bg2:#1f2030;
+  --card:#ffffff;
+  --accent:#6a5af9;
+  --accent2:#8f7bff;
+  --danger:#ff4d4d;
+  --text:#222;
+}
+
+html,body{height:100%;}
+
+body{
+  margin:0;
+  font-family:"Segoe UI", Tahoma, Arial, "Noto Sans Arabic", sans-serif;
+  background:linear-gradient(135deg, var(--bg1), var(--bg2));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  direction:rtl;
+  animation: fadeBody 1s ease forwards;
+}
+
+@keyframes fadeBody {
+  from {opacity:0;}
+  to {opacity:1;}
+}
+
+/* Card Container */
+.container{
+  width:360px;
+  max-width:94%;
+  background:rgba(255,255,255,0.12);
+  border-radius:18px;
+  padding:34px 26px;
+  box-shadow:0 20px 60px rgba(0,0,0,0.45);
+  backdrop-filter: blur(16px);
+  animation: slideDown 0.9s cubic-bezier(.17,.67,.32,1.35);
+}
+
+@keyframes slideDown {
+  from {opacity:0; transform:translateY(-40px);}
+  to   {opacity:1; transform:translateY(0);}
+}
+
+/* Title */
+h1{
+  margin:0 0 14px;
+  font-size:24px;
+  text-align:center;
+  color:white;
+  font-weight:700;
+  animation: pop 0.8s ease;
+}
+
+p.lead{
+  text-align:center;
+  color:#ddd;
+  font-size:14px;
+  margin-bottom:22px;
+}
+
+/* Floating Labels */
+label{
+  display:block;
+  font-size:10px;
+  color:#eee;
+  margin:10px 0 4px;
+  animation: fadeIn 0.8s ease both;
+}
+
+@keyframes fadeIn {
+  from {opacity:0;}
+  to   {opacity:1;}
+}
+
+/* Inputs */
+input[type="text"], input[type="password"]{
+  width:100%;
+  margin-left: 20%;
+  :12px 14px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,0.18);
+  outline:none;
+  font-size:15px;
+  background:rgba(255,255,255,0.08);
+  color:white;
+  transition:0.3s;
+  backdrop-filter: blur(4px);
+  animation: fadeIn 1s ease;
+}
+
+input:focus{
+  border-color:var(--accent);
+  background:rgba(255,255,255,0.16);
+  box-shadow:0 0 12px rgba(106,90,249,0.6);
+  transform:scale(1.02);
+}
+
+/* Buttons */
+.btn{
+  width:100%;
+  margin-top:20px;
+  padding:12px;
+  border-radius:10px;
+  border:0;
+  background:linear-gradient(135deg, var(--accent), var(--accent2));
+  color:white;
+  font-size:17px;
+  font-weight:600;
+  cursor:pointer;
+  transition:0.25s;
+  animation: fadeIn 1.2s ease;
+}
+
+.btn:hover{
+  transform:translateY(-3px) scale(1.03);
+  box-shadow:0 10px 25px rgba(106,90,249,0.5);
+}
+
+.btn.secondary{
+  background:transparent;
+  border:2px solid var(--accent);
+  color:var(--accent);
+}
+
+.btn.secondary:hover{
+  background:var(--accent);
+  color:white;
+  box-shadow:0 10px 25px rgba(106,90,249,0.5);
+}
+
+/* Error Message */
+.msg{
+  margin-top:12px;
+  color:var(--danger);
+  font-size:14px;
+  min-height:20px;
+  text-align:center;
+  animation: shake 0.4s ease;
+}
+
+@keyframes shake {
+  0%{ transform:translateX(0); }
+  25%{ transform:translateX(-4px); }
+  50%{ transform:translateX(4px); }
+  75%{ transform:translateX(-4px); }
+  100%{ transform:translateX(0); }
+}
+
+/* Welcome Screen */
+.welcome{
+  text-align:center;
+  padding:18px;
+  color:white;
+  animation: pop 0.8s ease forwards;
+}
+
+@keyframes pop {
+  from{ transform:scale(0.7); opacity:0; }
+  to  { transform:scale(1); opacity:1; }
+}
+
+.welcome h2{
+  margin:8px 0;
+  font-size:26px;
+  font-weight:700;
+}
+
+.small{
+  font-size:14px;
+  color:#ddd;
+}
+
+/* Footer */
+.footer{
+  text-align:center;
+  margin-top:14px;
+  font-size:13px;
+  color:#bbb;
+}
+
+    
+  </style>
+  
+</head>
+<body>
+  <div class="container" id="app">
+    <!-- Login card -->
+    <div id="login-card">
+      <h1>تسجيل الدخول</h1>
+      <p class="lead">أدخل اسمك و الــ كلمة المرور</p>
+
+      <label for="name">الاسم</label>
+      <input type="text" id="name" placeholder="مروان" autocomplete="off">
+
+      <label for="login">كلمة المرور</label>
+      <input type="password" id="login" placeholder="الزيتوني" autocomplete="off">
+
+      <button class="btn" id="btnLogin">تسجيل</button>
+
+      <div class="msg" id="message"></div>
+      <div class="footer"> جميع الحقوق محفوضة لدى بالوحيشي</div>
+    </div>
+
+    <!-- Welcome card (مخفية بالبداية) -->
+    <div id="welcome-card" style="display:none;">
+      <div class="welcome">
+        <h2 id="welcomeText">مرحبا</h2>
+        <p class="small" id="welcomeSub">لقد تم تسجيل الدخول بنجاح.</p>
+        <div style="margin-top:14px;">
+          <button class="btn secondary" id="btnLogout">تسجيل الخروج</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // هنا تعريف المستخدمين (tableau). غيّر أو زيّد حسب حاجتك.
+    // تحقق يتم بمطابقة حقل login مع login المخزن و حقل name مع name المخزن.
+    const users = [
+      { login:"123", name: "ايمن بالوحيشي" },
+      { login: "123", name: "  جندوبة ياسين" },
+      { login: "123", name: "مروان" }
+    ];
+
+    // عناصر DOM
+    const nameInput = document.getElementById('name');
+    const loginInput = document.getElementById('login');
+    const btnLogin = document.getElementById('btnLogin');
+    const message = document.getElementById('message');
+    const loginCard = document.getElementById('login-card');
+    const welcomeCard = document.getElementById('welcome-card');
+    const welcomeText = document.getElementById('welcomeText');
+    const btnLogout = document.getElementById('btnLogout');
+
+    // منع الفورم الافتراضي (لا يوجد form لكن نستخدم enter)
+    [nameInput, loginInput].forEach(el => {
+      el.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          doLogin();
+        }
+      });
+    });
+
+    btnLogin.addEventListener('click', doLogin);
+    btnLogout.addEventListener('click', logout);
+
+    function doLogin(){
+      const nameVal = nameInput.value.trim();
+      const loginVal = loginInput.value.trim();
+
+      message.textContent = ""; // تفريغ رسالة سابقة
+
+      if (!nameVal || !loginVal){
+        message.textContent = "رجاءً عَبّي جميع الحقول.";
+        return;
+      }
+
+      // البحث في المصفوفة (مطابقة كاملة، حساسية الحروف محفوظة — غيّر إذا تحب مطابقة case-insensitive)
+      const found = users.find(u => u.login === loginVal && u.name === nameVal);
+
+      if (found){
+        // نجاح
+        showWelcome(found.name);
+      } else {
+        // فشل
+        // ممكن نتحقق إنّ login موجود لكن الاسم خاطئ ونعطي رسالة أدق:
+        const loginExists = users.some(u => u.login === loginVal);
+        if (loginExists){
+          message.textContent = "الـ login صحيح لكن الاسم غير مطابق.";
+        } else {
+          message.textContent = "معلومات غير صحيحة.";
+        }
+      }
+    }
+
+    function showWelcome(name){
+      welcomeText.textContent = `مرحبا ${name}`;
+      loginCard.style.display = 'none';
+      welcomeCard.style.display = 'block';
+      // مسح الحقول
+      nameInput.value = '';
+      loginInput.value = '';
+    }
+
+    function logout(){
+      welcomeCard.style.display = 'none';
+      loginCard.style.display = 'block';
+      message.textContent = '';
+      nameInput.focus();
+    }
+  </script>
+</body>
+</html>
